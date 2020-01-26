@@ -1,0 +1,14 @@
+
+1 iniciando o projeto 
+yarn init -y 
+
+2 instalando o express
+yarn add express
+
+3 instalando o mongodb
+yarn add mongoose
+
+4 instalando live reload modemon
+yarn add nodemon -D
+4.1 Execultando o live reload 
+yarn start
