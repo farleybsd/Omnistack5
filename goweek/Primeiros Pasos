@@ -12,3 +12,6 @@ yarn add mongoose
 yarn add nodemon -D
 4.1 Execultando o live reload 
 yarn start
+
+5 Atualizando em tempo real 
+yarn add socket.io
