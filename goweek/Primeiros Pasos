@@ -15,3 +15,6 @@ yarn start
 
 5 Atualizando em tempo real 
 yarn add socket.io
+
+6 instalando cors
+yarn add cors
