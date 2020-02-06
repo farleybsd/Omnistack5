@@ -1,2 +1,5 @@
 1 Trabalhando com rotas no react
 yarn add react-router-dom
+
+2  Instalando o Axios
+yarn add axios

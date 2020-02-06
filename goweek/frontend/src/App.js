@@ -23,4 +23,4 @@ class App extends Component {
 
 export default App;
 
-// Parei  00:14:52
+// Parei 00:24:28
