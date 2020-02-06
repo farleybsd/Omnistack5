@@ -1,14 +1,38 @@
 import React, { Component } from 'react'
 import Api from '../services/api'
-
+import socket from 'socket.io-client'
 import TweeterLogo from '../twitter.svg'
 import './TimeLine.css'
 import api from '../services/api'
-
+import Tweet from '../components/Tweet'
 export default class Timeline extends Component {
 
     state = {
+        tweets: [],
         newTweet: ''
+    }
+
+    async componentDidMount() {
+        this.subscribeToEvents()
+        const response = await api.get('tweets')
+        this.setState({ tweets: response.data })
+    }
+
+    subscribeToEvents = () =>{
+        const io = socket('http://localhost:3000')
+
+        io.on('tweet',data =>{
+            //console.log(data)
+            this.setState({tweets: [data,...this.state.tweets] })
+        })
+
+        io.on('like',data =>{
+           // console.log(data)
+           this.setState({tweets: this.state.tweets.map(tweet =>
+               tweet._id == data._id ? data : tweet
+           ) })
+        })
+
     }
 
     handleInputChange = e => {
@@ -23,9 +47,9 @@ export default class Timeline extends Component {
         const content = this.state.newTweet
         const author = localStorage.getItem('@GoTwitter:username')
 
-        await api.post("tweets",{content,author})
-        this.setState({newTweet: ""})
-       // console.log(content,author)
+        await api.post("tweets", { content, author })
+        this.setState({ newTweet: "" })
+        // console.log(content,author)
     }
 
     render() {
@@ -40,6 +64,12 @@ export default class Timeline extends Component {
                         placeholder='O que está Acontecendo ?'
                     />
                 </form>
+                <ul className="tweet-list">
+                    {this.state.tweets.map(tweet => (
+                        <Tweet key={tweet._id} Tweet={tweet} />
+                    ))}
+                </ul>
+
             </div>
         )
     }

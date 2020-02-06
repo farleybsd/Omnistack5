@@ -3,3 +3,6 @@ yarn add react-router-dom
 
 2  Instalando o Axios
 yarn add axios
+
+3 Instalando Socket.Io
+yarn add socket.io-client
